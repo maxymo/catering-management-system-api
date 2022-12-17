@@ -17,7 +17,7 @@ jobs:
       with:
         repository: maxymo/catering-management-system-api # Public repository with Node.js API code
         token: ${{ secrets.GITHUB_TOKEN }}
-        path: api
+        #path: api
     - uses: actions/setup-node@v1
       with:
         node-version: 16.x
