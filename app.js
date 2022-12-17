@@ -16,9 +16,9 @@ const Menu = require("./models/menu");
 const Setting = require("./models/setting");
 const app = express();
 
-console.log("Connecting to " + process.env.MONGO_ATLAS_CONNECTION_STRING);
+console.log("Connecting to " + process.env.CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING);
 mongoose
-  .connect(process.env.MONGO_ATLAS_CONNECTION_STRING, {
+  .connect(process.env.CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

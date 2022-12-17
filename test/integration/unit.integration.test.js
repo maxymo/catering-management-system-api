@@ -14,7 +14,7 @@ let app;
 describe("Integration Teests - Units", () => {
   describe("GET /", () => {
     before((done) => {
-      process.env.MONGO_ATLAS_CONNECTION_STRING =
+      process.env.CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING =
         "mongodb+srv://nodeuser:Test1234@cluster0-hmpes.mongodb.net/catering-integration-tests?w=majority";
       process.env.PORT = 3001;
       app = require("../../../server");
