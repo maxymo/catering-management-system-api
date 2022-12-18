@@ -1,5 +1,4 @@
 const app = require("./app");
-const debug = require("debug")("node-angular");
 const http = require("http");
 
 const normalizePort = (val) => {
@@ -57,5 +56,6 @@ app.on("databaseReady", function () {
 const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
-module.exports = server.listen(port);
+
+module.exports = process.env.ENVIRONMENT == "local" ? server.listen(port) : app;
 module.exports.stop = stop;

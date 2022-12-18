@@ -8,6 +8,7 @@
   },
   "private": true,
   "dependencies": {
+    "aws-serverless-express": "^3.4.0",
     "bcryptjs": "^2.4.3",
     "convert-units": "^2.3.4",
     "express": "^4.17.1",
