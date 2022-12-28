@@ -42,7 +42,7 @@ Ensure AWS credentials are in your aws profile
 
 Deploy resources to AWS
 ```console
-terraform apply -auto-approve`
+terraform apply -auto-approve
 ```
 
 If deployment is successful, you will get the API url as an output
