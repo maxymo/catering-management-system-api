@@ -1,32 +1,48 @@
-# CateringManagementSystem
+# Catering Management System
 
 NodeJS: 16.13.2
 Angular: 15.0.0
 
 ## Getting Started
 
-Follow these steps to run this app locally
+### Launch API locally
 
-- Create a free MongoDB database (https://www.mongodb.com/).
-- Create nodemon.json file in root folder with the following environment constants (replace its values with the correct for your environment)
+Follow these steps to run this API locally:
 
-```json
-{
-  "env": {
-    "CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING": "mongodb+srv://nodeuser:XXXXXXXXX@xxxxxx.mongodb.net/xxxxxxx?w=majority",
-    "JWT_SECRET": "secret this should be longer"
-  }
-}
+Create a free MongoDB database (https://www.mongodb.com/).
+
+Copy nodemon.json from config directory to root directory and replace the values accordingly
+```console
+cp config/nodemon.json
 ```
 
-## Backend (API)
+Run API
+```console
+npm run startdemon
+```
 
-### Launch
-Run `npm run startdemon`
+## Deploy resources to AWS
 
-## Pack for Lambda
+Install ClaudiaJS if not installed
+```console
+npm i -g claudia
+```
 
-1. Install ClaudiaJS if not installed
-`npm i -g claudia`
+Create zip file, run from root directory of project:
+```console
+claudia pack --no-optional-dependencies --output deploy/terraform/cms-api.zip
+```
 
-2. Create zip file `claudia pack --no-optional-dependencies --output deploy/claudia/catering-management-ssystem-api.zip`
+Go to terraform directory
+```console
+cd deploy/terraform
+```
+
+Ensure AWS credentials are in your aws profile
+
+Deploy resources to AWS
+```console
+terraform apply -auto-approve`
+```
+
+If deployment is successful, you will get the API url as an output

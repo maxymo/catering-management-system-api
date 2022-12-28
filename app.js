@@ -2,18 +2,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-const unitRoutes = require("./routes/units");
-const shopRoutes = require("./routes/shops");
-const ingredientRoutes = require("./routes/ingredients");
-const menuRoutes = require("./routes/menus");
-const userRoutes = require("./routes/user");
+const unitRoutes = require("./src/routes/units");
+const shopRoutes = require("./src/routes/shops");
+const ingredientRoutes = require("./src/routes/ingredients");
+const menuRoutes = require("./src/routes/menus");
+const userRoutes = require("./src/routes/user");
 
-const User = require("./models/user");
-const Unit = require("./models/unit");
-const Shop = require("./models/shop");
-const Ingredient = require("./models/ingredient");
-const Menu = require("./models/menu");
-const Setting = require("./models/setting");
+const User = require("./src/models/user");
+const Unit = require("./src/models/unit");
+const Shop = require("./src/models/shop");
+const Ingredient = require("./src/models/ingredient");
+const Menu = require("./src/models/menu");
+const Setting = require("./src/models/setting");
 const app = express();
 
 console.log("Connecting to " + process.env.CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING);
@@ -68,7 +68,11 @@ app.use((req, res, next) => {
   );
   next();
 });
-
+app.get('/',(req,res)=>{
+  res.status(200).json({
+    message: "OK",
+  });
+});
 app.use("/api/units", unitRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/shops", shopRoutes);

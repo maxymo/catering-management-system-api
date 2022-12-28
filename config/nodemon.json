@@ -1,0 +1,7 @@
+{
+  "env": {
+    "CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING": "<ENTER CONNECTION STREET HERE>",
+    "JWT_SECRET": "<ENTER JWT SECRET HERE (at least 32 characters)>",
+    "ENVIRONMENT": "local"
+  }
+}
