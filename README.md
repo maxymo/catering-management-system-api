@@ -7,7 +7,7 @@ Angular: 15.0.0
 
 Follow these steps to run this app locally
 
-- Create a free mongoose database (https://www.mongodb.com/).
+- Create a free MongoDB database (https://www.mongodb.com/).
 - Create nodemon.json file in root folder with the following environment constants (replace its values with the correct for your environment)
 
 ```json
@@ -23,3 +23,10 @@ Follow these steps to run this app locally
 
 ### Launch
 Run `npm run startdemon`
+
+## Pack for Lambda
+
+1. Install ClaudiaJS if not installed
+`npm i -g claudia`
+
+2. Create zip file `claudia pack --no-optional-dependencies --output deploy/claudia/catering-management-ssystem-api.zip`

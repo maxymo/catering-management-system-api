@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "catering-management-system-api-executor",
+    "name": "catering-management-system-api",
+    "region": "eu-west-1"
+  },
+  "api": {
+    "id": "5y8yjw8ce6"
+  }
+}
