@@ -1,0 +1,33 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: maxymo/catering-management-system-api-cicd # Private repository with Terraform configuration files
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+      with:
+        repository: maxymo/catering-management-system-api # Public repository with Node.js API code
+        token: ${{ secrets.GITHUB_TOKEN }}
+        #path: api
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    - run: npm install
+    - run: npm test
+    - run: npm run build
+    - uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.1.7
+    - run: terraform init
+      #working-directory: private-repo/terraform # Specify the directory containing the Terraform configuration files
+    - run: terraform apply -auto-approve
+      #working-directory: private-repo/terraform # Specify the directory containing the Terraform configuration files
