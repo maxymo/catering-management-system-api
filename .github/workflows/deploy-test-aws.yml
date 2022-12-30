@@ -21,5 +21,5 @@ jobs:
       env:
         TFE_TOKEN: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
 #    - name: Terraform Apply
-      run: terraform apply -auto-approve
+      run: terraform ini && terraform apply -auto-approve
       working-directory: deploy/terraform
