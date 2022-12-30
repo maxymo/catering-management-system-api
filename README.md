@@ -1,7 +1,9 @@
 # Catering Management System
 
-NodeJS: 16.13.2
-Angular: 15.0.0
+**Warning**
+This API is only a prototype and is not safe or ready for production yet.
+
+NodeJS: 18.12.1
 
 ## Getting Started
 
