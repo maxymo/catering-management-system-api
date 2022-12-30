@@ -20,6 +20,6 @@ jobs:
     - name: Set environment variables
       env:
         TFE_TOKEN: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
-    - name: Terraform Apply
+#    - name: Terraform Apply
       run: terraform apply -auto-approve
       working-directory: deploy/terraform
