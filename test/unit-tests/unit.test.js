@@ -7,8 +7,8 @@ const sinon = require("sinon");
 const expect = chai.expect;
 chai.use(chaiAsPromised);
 
-const unitController = require("../../../controllers/unit");
-var unitModel = require("../../../models/unit");
+const unitController = require("../../src/controllers/unit");
+var unitModel = require("../../src/models/unit");
 
 let mongoServer;
 const opts = { useUnifiedTopology: true, useNewUrlParser: true };

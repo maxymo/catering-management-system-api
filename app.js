@@ -17,7 +17,7 @@ const Setting = require("./src/models/setting");
 const app = express();
 
 console.log("Connecting to " + process.env.CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING);
-mongoose
+mongoose.set('strictQuery', false)
   .connect(process.env.CATERING_MANAGEMENT_SYSTEM_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -45,7 +45,7 @@ mongoose
     return;
   })
   .catch(() => {
-    console.log("Contection failed");
+    console.log("Connection failed");
   });
 
 function disconnectDatabase() {
