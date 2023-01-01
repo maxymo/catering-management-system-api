@@ -24,4 +24,4 @@ jobs:
       working-directory: deploy/terraform
       env:
         TF_VAR_db_connection_string: ${{ secrets.MONGO_CONNECTION_STRING }}
-        jwt_secret: ${{ secrets.JWT_SECRET }}
+        TF_VAR_jwt_secret: ${{ secrets.JWT_SECRET }}
