@@ -20,6 +20,6 @@ jobs:
         cli_config_credentials_token: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
     - name: Terraform Apply
       env:
-        TFE_TOKEN: ${{ secrets.MY_TOKEN }}
+        TFE_TOKEN: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
       run: terraform init && terraform apply -auto-approve
       working-directory: deploy/terraform
