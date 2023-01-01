@@ -23,7 +23,3 @@ terraform {
 provider "aws" {
   region = "eu-west-1"
 }
-
-provider "tfe" {
-  token = "6PhH2apXdhez8g.atlasv1.sirPDUbJlDZk3XTnel8REmUxSf7MxJ5NL4zG64fYznm6RBa3huXSD7FWpSVtgJ8jOl0"
-}
