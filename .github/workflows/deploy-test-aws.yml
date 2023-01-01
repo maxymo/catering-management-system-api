@@ -13,13 +13,11 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Pack lambda
-      run: zip -r deploy/terraform/archive.zip .
+      run: zip -r deploy/terraform/cms-api.zip .
     - uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.3.6
         cli_config_credentials_token: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
     - name: Terraform Apply
-      env:
-        TFE_TOKEN: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
       run: terraform init && terraform apply -auto-approve
       working-directory: deploy/terraform
