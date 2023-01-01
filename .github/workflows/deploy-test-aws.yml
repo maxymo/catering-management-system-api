@@ -22,3 +22,6 @@ jobs:
     - name: Terraform Apply
       run: terraform init && terraform apply -auto-approve
       working-directory: deploy/terraform
+      env:
+        TF_VAR_db_connection_string: ${{ secrets.MONGO_CONNECTION_STRING }}
+        jwt_secret: ${{ secrets.JWT_SECRET }}
