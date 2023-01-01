@@ -5,6 +5,11 @@ on:
     branches:
       - master
 
+env:
+  STAGE: stg
+  AWS_ACCOUNT: 972670838762
+  AWS_REGION: eu-west-1
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,4 +31,6 @@ jobs:
       env:
         TF_VAR_db_connection_string: ${{ secrets.MONGO_CONNECTION_STRING }}
         TF_VAR_jwt_secret: ${{ secrets.JWT_SECRET }}
-        TF_VAR_stage: ${{ secrets.STAGE }}
+        TF_VAR_stage: ${{ env.STAGE }}
+        TF_VAR_aws_account: ${{ env.AWS_ACCOUNT }}
+        TF_VAR_aws_region: ${{ env.AWS_REGION }}
