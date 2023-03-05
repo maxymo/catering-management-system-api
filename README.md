@@ -32,7 +32,7 @@ npm i -g claudia
 
 Create zip file, run from root directory of project:
 ```console
-
+claudia pack --no-optional-dependencies --output deploy/terraform/cms-api.zip
 ```
 
 Go to terraform directory
