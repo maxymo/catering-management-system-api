@@ -1,6 +1,6 @@
 {
   "name": "catering-management-system-api",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "test": "nyc mocha test/unit-tests/**/*.js --timeout 10000",
     "inttest": "nyc mocha test/integration/**/*.js --timeout 10000",
