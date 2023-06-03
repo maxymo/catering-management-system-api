@@ -11,13 +11,6 @@ locals {
 resource "aws_apigatewayv2_api" "api" {
   name          = "${var.stage}-apigateway-api"
   protocol_type = "HTTP"
-  cors_configuration {
-    allow_headers = local.cors_configuration.allow_headers
-    allow_methods = local.cors_configuration.allow_methods
-    allow_origins = local.cors_configuration.allow_origins
-    expose_headers = local.cors_configuration.expose_headers
-    max_age        = local.cors_configuration.max_age
-  }
 }
 
 resource "aws_apigatewayv2_stage" "api" {
