@@ -67,3 +67,25 @@ resource "aws_lambda_permission" "api_gw" {
 
   source_arn = "${aws_apigatewayv2_api.api.execution_arn}/*/*"
 }
+
+resource "aws_iam_policy" "apigw_cloudwatch" {
+  name        = "apigw_cloudwatch"
+  path        = "/"
+  description = "Allows API Gateway to write logs to CloudWatch"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents", "logs:DescribeLogGroups", "logs:DescribeLogStreams"],
+        Resource = "*",
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "apigw_cloudwatch_attach" {
+  role       = aws_iam_role.api.name # Replace with your API Gateway IAM Role
+  policy_arn = aws_iam_policy.apigw_cloudwatch.arn
+}
