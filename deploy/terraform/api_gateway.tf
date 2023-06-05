@@ -1,13 +1,3 @@
-locals {
-  cors_configuration = {
-    allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token"]
-    allow_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-    allow_origins = ["https://stg-s3-cms-web.s3.eu-west-1.amazonaws.com"]
-    expose_headers = ["x-api-key", "x-amz-security-token"]
-    max_age        = 300
-  }
-}
-
 resource "aws_apigatewayv2_api" "api" {
   name          = "${var.stage}-apigateway-api"
   protocol_type = "HTTP"
@@ -66,26 +56,4 @@ resource "aws_lambda_permission" "api_gw" {
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.api.execution_arn}/*/*"
-}
-
-resource "aws_iam_policy" "apigw_cloudwatch" {
-  name        = "apigw_cloudwatch"
-  path        = "/"
-  description = "Allows API Gateway to write logs to CloudWatch"
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect   = "Allow",
-        Action   = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents", "logs:DescribeLogGroups", "logs:DescribeLogStreams"],
-        Resource = "*",
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "apigw_cloudwatch_attach" {
-  role       = aws_iam_role.api.name # Replace with your API Gateway IAM Role
-  policy_arn = aws_iam_policy.apigw_cloudwatch.arn
 }
