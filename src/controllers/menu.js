@@ -78,7 +78,7 @@ exports.deleteMenu = (req, res, next) => {
   const id = req.params.id;
   Menu.deleteOne({ _id: id })
     .then((result) => {
-      if (result.n > 0) {
+      if (result.deletedCount > 0) {
         res.status(200).json({
           message: "Menu deleted",
         });

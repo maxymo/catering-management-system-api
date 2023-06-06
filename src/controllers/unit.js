@@ -77,7 +77,7 @@ exports.deleteUnit = (req, res, next) => {
   const id = req.params.id;
   Unit.deleteOne({ _id: id })
     .then((result) => {
-      if (result.n > 0) {
+      if (result.deletedCount > 0) {
         res.status(200).json({
           message: "Unit deleted",
         });

@@ -79,7 +79,7 @@ exports.deleteIngredient = (req, res, next) => {
   const id = req.params.id;
   Ingredient.deleteOne({ _id: id })
     .then((result) => {
-      if (result.n > 0) {
+      if (result.deletedCount > 0) {
         res.status(200).json({
           message: "Ingredient deleted",
         });
