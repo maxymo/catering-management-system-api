@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const menuSchema = mongoose.Schema({
+const dishSchema = mongoose.Schema({
   name: { type: String, require: true, unique: true },
   readonly: { type: Boolean, require: true },
   description: { type: String },
@@ -14,7 +14,7 @@ const menuSchema = mongoose.Schema({
   ]
 });
 
-const systemMenus = [
+const systemDishes = [
   {
     name: "Pasta Carbonara",
     shopName: "Market A",
@@ -61,17 +61,17 @@ const systemMenus = [
   },
 ];
 
-menuSchema.statics.initData = async (Menu) => {
+dishSchema.statics.initData = async (Dish) => {
   var promises = [];
-  Menu.deleteMany({}, (err) => {
-    systemMenus.forEach((menu) => {
-      promises.push(Menu.create(menu));
+  Dish.deleteMany({}, (err) => {
+    systemDishes.forEach((dish) => {
+      promises.push(Dish.create(dish));
     });
   });
   Promise.all(promises);
 };
 
-module.exports = mongoose.model("Menu", menuSchema);
-module.exports.systemMenus = function () {
-  return systemMenus;
+module.exports = mongoose.model("Dish", dishSchema);
+module.exports.systemDishes = function () {
+  return systemDishes;
 };

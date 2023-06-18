@@ -1,12 +1,12 @@
-const Menu = require("../models/menu");
+const Dish = require("../models/dish");
 
-exports.getMenus = (req, res, next) => {
+exports.getDishes = (req, res, next) => {
   const pageSize = +req.query.pageSize;
   const currentPage = +req.query.currentPage;
 
   try {
-    const query = Menu.find();
-    let fetchedMenus;
+    const query = Dish.find();
+    let fetchedDishes;
 
     if (pageSize && currentPage) {
       query.skip(pageSize * (currentPage - 1));
@@ -15,54 +15,54 @@ exports.getMenus = (req, res, next) => {
 
     return query
       .then((documents) => {
-        fetchedMenus = documents;
-        return Menu.countDocuments();
+        fetchedDishes = documents;
+        return Dish.countDocuments();
       })
       .then((count) => {
         res.setHeader("content-type", "application/json");
         res.status(200).json({
-          message: "Menus fetched successfully..",
-          data: fetchedMenus,
+          message: "Dishes fetched successfully..",
+          data: fetchedDishes,
           count: count,
         });
         return;
       })
       .catch((error) => {
         res.status(500).json({
-          message: "Fetching menus failed.",
+          message: "Fetching dishes failed.",
         });
       });
   } catch (err) {
     res.status(500).json({
-      message: "Fetching menus failed.",
+      message: "Fetching dishes failed.",
     });
     return err;
   }
 };
 
-exports.createMenu = (req, res, next) => {
+exports.createDish = (req, res, next) => {
   try {
-    const menuName = req.body.name.trim();
-    const menu = new Menu({
+    const dishName = req.body.name.trim();
+    const dish = new Dish({
       readonly: false,
-      name: menuName,
+      name: dishName,
       description: req.body.description,
       portions: req.body.portions,
       ingredients: req.body.ingredients,
     });
 
-    return menu
+    return dish
       .save()
-      .then((createdMenu) => {
+      .then((createdDish) => {
         res.status(201).json({
-          message: "Menu created succesfully.",
-          id: createdMenu._id,
+          message: "Dish created succesfully.",
+          id: createdDish._id,
         });
         return;
       })
       .catch((error) => {
         res.status(500).json({
-          message: "Couldn't create menu",
+          message: "Couldn't create dish",
         });
         return;
       });
@@ -74,13 +74,13 @@ exports.createMenu = (req, res, next) => {
   }
 };
 
-exports.deleteMenu = (req, res, next) => {
+exports.deleteDish = (req, res, next) => {
   const id = req.params.id;
-  Menu.deleteOne({ _id: id })
+  Dish.deleteOne({ _id: id })
     .then((result) => {
       if (result.deletedCount > 0) {
         res.status(200).json({
-          message: "Menu deleted",
+          message: "Dish deleted",
         });
       } else {
         res.status(401).json({
@@ -90,52 +90,52 @@ exports.deleteMenu = (req, res, next) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: "Delete menu failed",
+        message: "Delete dish failed",
       });
     });
 };
 
-exports.getMenu = (req, res, next) => {
+exports.getDish = (req, res, next) => {
   const id = req.params.id;
-  const query = Menu.findById(id);
+  const query = Dish.findById(id);
 
-  query.then((menu) => {
-    res.status(200).json({ data: menu });
+  query.then((dish) => {
+    res.status(200).json({ data: dish });
   });
 };
 
-exports.updateMenu = (req, res, next) => {
+exports.updateDish = (req, res, next) => {
   try {
-    const menuName = req.body.name.trim();
-    const menuId = req.body.id;
-    const menu = new Menu({
-      _id: menuId,
+    const dishName = req.body.name.trim();
+    const dishId = req.body.id;
+    const dish = new Dish({
+      _id: dishId,
       readonly: false,
-      name: menuName,
+      name: dishName,
       description: req.body.description,
       portions: req.body.portions,
       ingredients: req.body.ingredients,
     });
-    Menu.findById(menuId).then((fetchedMenu) => {
-      if (!fetchedMenu) {
+    Dish.findById(dishId).then((fetchedDish) => {
+      if (!fetchedDish) {
         res.status(400).json({
-          message: `Menu with id=${menuId} does not exist.`,
+          message: `Dish with id=${dishId} does not exist.`,
         });
-      } else if (fetchedMenu.readonly) {
+      } else if (fetchedDish.readonly) {
         res.status(400).json({
-          message: "Menu cannot be updated because is read only.",
+          message: "Dish cannot be updated because is read only.",
         });
       } else {
-        Menu.updateOne({ _id: menuId, readonly: false }, menu)
-          .then((updatedMenu) => {
+        Dish.updateOne({ _id: dishId, readonly: false }, dish)
+          .then((updatedDish) => {
             res.status(201).json({
-              message: "Menu updated succesfully.",
+              message: "Dish updated succesfully.",
             });
           })
           .catch((error) => {
             console.log(error);
             res.status(500).json({
-              message: "Couldn't update menu",
+              message: "Couldn't update dish",
             });
           });
       }

@@ -5,14 +5,14 @@ const bodyParser = require("body-parser");
 const unitRoutes = require("./src/routes/units");
 const shopRoutes = require("./src/routes/shops");
 const ingredientRoutes = require("./src/routes/ingredients");
-const menuRoutes = require("./src/routes/menus");
+const dishRoutes = require("./src/routes/dishes");
 const userRoutes = require("./src/routes/user");
 
 const User = require("./src/models/user");
 const Unit = require("./src/models/unit");
 const Shop = require("./src/models/shop");
 const Ingredient = require("./src/models/ingredient");
-const Menu = require("./src/models/menu");
+const Dish = require("./src/models/dish");
 const Setting = require("./src/models/setting");
 const app = express();
 
@@ -31,7 +31,7 @@ mongoose.set('strictQuery', false)
           Unit.initData(Unit).then((_) => {
             Shop.initData(Shop).then((_) => {
               Ingredient.initData(Ingredient).then((_) => {
-                Menu.initData(Menu).then((_) => {
+                Dish.initData(Dish).then((_) => {
                   Setting.initData(Setting).then((_) => {
                     app.emit("databaseReady");
                   });
@@ -77,7 +77,7 @@ app.use("/api/units", unitRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/shops", shopRoutes);
 app.use("/api/ingredients", ingredientRoutes);
-app.use("/api/menus", menuRoutes);
+app.use("/api/dishes", dishRoutes);
 
 module.exports = app;
 module.exports.disconnectDatabase = disconnectDatabase;
