@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema({
-  name: { type: String, require: true, unique: true },
-  date: { Type: Date, require: true },
+  name: { type: String, require: true },
+  date: { type: Date, require: true },
   readonly: { type: Boolean, require: true },
   description: { type: String },
   menu: [
@@ -16,7 +16,7 @@ const orderSchema = mongoose.Schema({
 const systemOrders = [
   {
     name: "Event at Virgin Media",
-    date: "2023-06-20",
+    date: "2023-06-20T21:11:54",
     readonly: false,
     description: "",
     menu: [

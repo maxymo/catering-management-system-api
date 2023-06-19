@@ -6,6 +6,7 @@ const unitRoutes = require("./src/routes/units");
 const shopRoutes = require("./src/routes/shops");
 const ingredientRoutes = require("./src/routes/ingredients");
 const dishRoutes = require("./src/routes/dishes");
+const orderRoutes = require("./src/routes/orders");
 const userRoutes = require("./src/routes/user");
 
 const User = require("./src/models/user");
@@ -13,6 +14,7 @@ const Unit = require("./src/models/unit");
 const Shop = require("./src/models/shop");
 const Ingredient = require("./src/models/ingredient");
 const Dish = require("./src/models/dish");
+const Order = require("./src/models/order");
 const Setting = require("./src/models/setting");
 const app = express();
 
@@ -32,8 +34,10 @@ mongoose.set('strictQuery', false)
             Shop.initData(Shop).then((_) => {
               Ingredient.initData(Ingredient).then((_) => {
                 Dish.initData(Dish).then((_) => {
-                  Setting.initData(Setting).then((_) => {
-                    app.emit("databaseReady");
+                  Order.initData(Order).then((_) => {
+                    Setting.initData(Setting).then((_) => {
+                      app.emit("databaseReady");
+                    });
                   });
                 });
               });
@@ -78,6 +82,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/shops", shopRoutes);
 app.use("/api/ingredients", ingredientRoutes);
 app.use("/api/dishes", dishRoutes);
+app.use("/api/orders", orderRoutes);
 
 module.exports = app;
 module.exports.disconnectDatabase = disconnectDatabase;
